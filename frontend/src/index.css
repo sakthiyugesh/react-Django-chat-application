@@ -1,0 +1,28 @@
+.user-details-nav {
+  margin-bottom: 20px;
+}
+
+.chat-column {
+  margin-top: 20px;
+}
+.chat-container{
+  min-height: 97vh;
+  height: 100%;
+}
+
+h3{
+  background-color: #2f2f2f;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+h2{
+  background-color: transparent;
+  color: black;
+  border-radius: 5px;
+  padding:  10px;
+}
+
+.bg-header{
+  background-color: #520DC2;
+}
