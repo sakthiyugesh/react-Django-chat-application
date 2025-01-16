@@ -25,6 +25,10 @@ FROM nginx:alpine AS production
 # Copy the build output from the previous stage
 COPY --from=build /frontend/dist /usr/share/nginx/html
 
+
+COPY /home/ubuntu/mycert/mywebsite.crt /etc/ssl/certs/mywebsite.crt
+COPY /home/ubuntu/mycert/mywebsite.key /etc/ssl/private/mywebsite.key
+
 # Copy a custom Nginx configuration file (if needed)
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
 
