@@ -3,6 +3,7 @@ import AuthContext from "../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import GoogleLoginButton from "../components/GoogleLoginButton";
 import LoginComp from "../components/LoginComp";
+import User from "../components/User";
 
 const Login = () => {
   const { user } = useContext(AuthContext);
@@ -27,7 +28,8 @@ const Login = () => {
               Sign in to continue to Chat with Your Friends..!
             </p>
             <GoogleLoginButton />
-            <LoginComp/>
+            {/* <LoginComp/> */}
+            <User/>
           </div>
         ) : (
           <p className="text-success">Redirecting to home...</p>
