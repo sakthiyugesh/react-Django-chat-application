@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import AuthContext from "../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import GoogleLoginButton from "../components/GoogleLoginButton";
+import LoginComp from "../components/LoginComp";
 
 const Login = () => {
   const { user } = useContext(AuthContext);
@@ -22,8 +23,11 @@ const Login = () => {
         <h1 className="mb-4">Hey Welcome, </h1>
         {!user ? (
           <div>
-            <p className="mb-3">Sign in to continue to Chat with Your Friends..!</p>
-            <GoogleLoginButton  />
+            <p className="mb-3">
+              Sign in to continue to Chat with Your Friends..!
+            </p>
+            <GoogleLoginButton />
+            <LoginComp/>
           </div>
         ) : (
           <p className="text-success">Redirecting to home...</p>

@@ -2,17 +2,22 @@
 
 import requests
 import requests_oauthlib
-from rest_framework import status, generics
+from rest_framework import status, generics, permissions
 from django.db.models import OuterRef,Subquery,Q
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from .models import CustomUser
 from .serializers import *
 from backend import settings
 from django.shortcuts import redirect
+from django.contrib.auth import authenticate
 from django.http import JsonResponse
+
+
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import MyTokenObtainPairSerializer
 
 @api_view(['get'])
 def Userget(APIView):
@@ -127,25 +132,67 @@ class GoogleLogin(APIView):
 
 
 
+# Create your views here.
 
-
-# class FilterMessagesView(generics.ListAPIView):
-#     serializer_class = MessageSerializer
-
-#     def get_queryset(self):
-#         user_id = self.kwargs['user_id']
-#         # filter_type = self.request.query_params.get('filter_type', None)  # Get optional filter_type from query params
-
-#         # Base query: all messages involving the user
-#         query = Q(sender=user_id) | Q(receiver=user_id)
-
-#         # Apply additional filters if specified
-#         # if filter_type == 'sent':
-#         #     query = Q(sender=user_id)
-#         # elif filter_type == 'received':
-#         #     query = Q(receiver=user_id)
-
-#         # Filter and order messages
-#         messages = ChatMessage.objects.filter(query).order_by('-date_time')
-#         return messages
+class RegisterView(generics.GenericAPIView):
+    serializer_class = RegisterSerializer
+    def post(self,request):
+        user=request.data
+        serializer = self.serializer_class(data=user)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        user_data = serializer.data
+        return Response(user_data, status=status.HTTP_201_CREATED)
     
+
+
+
+class LoginView(APIView):
+    serializer_class = LoginSerializer
+    def post(self, request):
+        serializer = LoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        username = serializer.validated_data['username']
+        password = serializer.validated_data['password']
+
+        # Authenticate user
+        user = authenticate(username=username, password=password)
+        if not user:
+            raise AuthenticationFailed('Invalid credentials, try again')
+        if not user.is_active:
+            raise AuthenticationFailed('Account disabled, contact admin')
+
+        # Generate tokens
+        refresh = RefreshToken.for_user(user)
+        access_token = refresh.access_token
+        access_token['user_id'] = user.id
+        access_token['email'] = user.email
+        access_token['first_name'] = user.first_name
+        access_token['last_name'] = user.last_name
+
+        return Response(
+            {
+                'refresh': str(refresh),
+                'access': str(access_token),
+            },
+            status=status.HTTP_200_OK
+        )
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+
+
+    
+
+class LogoutAPIView(generics.GenericAPIView):
+    serializer_class = LogoutSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
