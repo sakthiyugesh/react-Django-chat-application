@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
+
   let navigate = useNavigate();
   const [user, setUser] = useState(() => {
     const tokens = localStorage.getItem("authTokens");
@@ -28,7 +30,7 @@ export const AuthProvider = ({ children }) => {
   let RegisterUser = async (e) => {
     e.preventDefault();
 
-    let response = await fetch("/api/register/", {
+    let response = await fetch(`${backendUrl}/api/register/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

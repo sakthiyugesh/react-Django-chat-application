@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const GoogleLoginButton = () => {
   const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
   const [loading, setLoading] = useState(false); // Initialize loading state
   const [errorMessage, setErrorMessage] = useState(""); // For error messages
 
@@ -15,7 +16,7 @@ const GoogleLoginButton = () => {
 
       try {
         const response = await axios.post(
-          "/api/auth/google/",
+          `${backendUrl}/api/auth/google/`,
           { token: access_token }
         );
         localStorage.setItem("authTokens", JSON.stringify(response.data));

@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 
 function User() {
   const [data, setData] = useState([]);
+  useEffect(()=>{
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    console.log(backendUrl)
+  })
 
   useEffect(() => {
     fetch("/api/user") 

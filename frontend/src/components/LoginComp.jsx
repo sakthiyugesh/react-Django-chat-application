@@ -3,6 +3,7 @@ import AuthContext from "../auth/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginComp = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
   // let { LoginUser } = useContext(AuthContext);
   // let [authToken, setAuthtokens] = useState(() =>
   //   localStorage.getItem("authTokens")
@@ -13,7 +14,7 @@ const LoginComp = () => {
   let LoginJwtUser = async (e) => {
     e.preventDefault();
 
-    let response = await fetch("/api/login/", {
+    let response = await fetch(`${backendUrl}/api/login/`, {
       method: "POST",
       headers: {
         // Authorization: `Bearer ${parsedData.tokens.access}`,

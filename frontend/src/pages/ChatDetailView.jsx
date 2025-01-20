@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import ChatInbox from "../components/ChatInbox";
 
 const ChatDetailView = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
+  
   const [message, setMessage] = useState([""]);
   const [newMessage, setNewMessage] = useState("");
   const { sender, receiver, name } = useParams();
@@ -36,9 +38,7 @@ const ChatDetailView = () => {
   }, [sender, receiver]);
 
   const getMessage = async () => {
-    const response = await axios.get(
-      `/api/all-message/${sender}/${receiver}/`
-    );
+    const response = await axios.get(`${backendUrl}/api/all-message/${sender}/${receiver}/`);
     setMessage(response.data);
   };
 

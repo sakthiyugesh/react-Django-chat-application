@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
@@ -6,6 +5,8 @@ import { Link } from "react-router-dom";
 import Fuse from "fuse.js";
 
 const ChatInbox = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const UserData = localStorage.getItem("authTokens");
   const [user, setUser] = useState(UserData ? jwtDecode(UserData) : null);
   const [userlist, setUserList] = useState([]);
@@ -23,7 +24,7 @@ const ChatInbox = () => {
     if (user) {
       try {
         const response = await axios.get(
-          `/api/my-message/${user.user_id}/`
+          `${backendUrl}/api/my-message/${user.user_id}/`
         );
         setMessages(response.data);
       } catch (error) {
@@ -36,7 +37,7 @@ const ChatInbox = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(`/api/user/`);
+      const response = await axios.get(`${backendUrl}/api/user/`);
       setUserList(response.data);
     } catch (error) {
       console.error("Error fetching user lists:", error);
@@ -139,7 +140,7 @@ const ChatInbox = () => {
       </div>
       <div className="list-group text-center  mt-3">
         <div>
-          <h3 className="p-3"> 
+          <h3 className="p-3">
             User Lists <small>(available)</small>
           </h3>
         </div>
