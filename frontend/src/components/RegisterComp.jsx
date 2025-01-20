@@ -55,7 +55,7 @@ const RegisterComp = () => {
                 >
                   <div className="form-group mt-3">
                     <input
-                      type="name"
+                      type="username"
                       className="form-control"
                       name="username"
                       required
@@ -73,7 +73,7 @@ const RegisterComp = () => {
                       required
                       placeholder="matt@gmail.com"
                     />
-                    <label className="form-control-placeholder" for="username">
+                    <label className="form-control-placeholder" for="email">
                       Email
                     </label>
                   </div>

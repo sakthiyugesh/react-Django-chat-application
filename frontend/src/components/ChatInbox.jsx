@@ -138,9 +138,9 @@ const ChatInbox = () => {
           </div>
         )}
       </div>
-      <div className="list-group text-center  mt-3">
+      <div className="list-group text-center   mt-3">
         <div>
-          <h3 className="p-3">
+          <h3 className="p-3 text-white">
             User Lists <small>(available)</small>
           </h3>
         </div>

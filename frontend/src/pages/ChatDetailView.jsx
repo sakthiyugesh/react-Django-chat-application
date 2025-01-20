@@ -65,7 +65,7 @@ const ChatDetailView = () => {
     console.log(filteredMessageIds);
     const markMessagesAsRead = async () => {
       if (filteredMessageIds.length > 0) {
-        await axios.post("/api/read-messages/", {
+        await axios.post(`${backendUrl}/api/read-messages/`, {
           msg_ids: filteredMessageIds,
         });
         // console.log("Messages marked as read");
