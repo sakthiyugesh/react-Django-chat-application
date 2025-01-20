@@ -28,8 +28,8 @@ const Login = () => {
               Sign in to continue to Chat with Your Friends..!
             </p>
             <GoogleLoginButton />
-            {/* <LoginComp/> */}
-            <User/>
+            <LoginComp/>
+            {/* <User/> */}
           </div>
         ) : (
           <p className="text-success">Redirecting to home...</p>
