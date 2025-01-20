@@ -1,4 +1,3 @@
-
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useState } from "react";
@@ -16,7 +15,7 @@ const GoogleLoginButton = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost:8000/api/auth/google/",
+          "/api/auth/google/",
           { token: access_token }
         );
         localStorage.setItem("authTokens", JSON.stringify(response.data));

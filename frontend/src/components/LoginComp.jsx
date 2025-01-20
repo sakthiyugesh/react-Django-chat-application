@@ -13,7 +13,7 @@ const LoginComp = () => {
   let LoginJwtUser = async (e) => {
     e.preventDefault();
 
-    let response = await fetch("http://127.0.0.1:8000/api/login/", {
+    let response = await fetch("/api/login/", {
       method: "POST",
       headers: {
         // Authorization: `Bearer ${parsedData.tokens.access}`,

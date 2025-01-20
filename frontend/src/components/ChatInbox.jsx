@@ -23,7 +23,7 @@ const ChatInbox = () => {
     if (user) {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/my-message/${user.user_id}/`
+          `/api/my-message/${user.user_id}/`
         );
         setMessages(response.data);
       } catch (error) {
@@ -36,7 +36,7 @@ const ChatInbox = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/user/`);
+      const response = await axios.get(`/api/user/`);
       setUserList(response.data);
     } catch (error) {
       console.error("Error fetching user lists:", error);
