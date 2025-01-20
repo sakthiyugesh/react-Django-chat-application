@@ -21,14 +21,14 @@ const Login = () => {
   return (
     <div className="container d-flex flex-column justify-content-center align-items-center vh-100">
       <div className="text-center">
-        <h1 className="mb-4">Hey Welcome, </h1>
+        <h1 className="mb-4">Hey Welcome, ooooo </h1>
         {!user ? (
           <div>
             <p className="mb-3">
               Sign in to continue to Chat with Your Friends..!
             </p>
             <GoogleLoginButton />
-            {/* <LoginComp/> */}
+            <LoginComp/>
             <User/>
           </div>
         ) : (
