@@ -49,7 +49,7 @@ const ChatInbox = () => {
   useEffect(() => {
     if (user) {
       const ws = new WebSocket(
-        `ws://localhost:8000/ws/chat/inbox/${user.user_id}/`
+        `ws://54.196.229.75:8000/ws/chat/inbox/${user.user_id}/`
       );
 
       ws.onmessage = (event) => {

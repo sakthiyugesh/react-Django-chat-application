@@ -22,7 +22,7 @@ const ChatDetailView = () => {
     getMessage();
     console.log(message);
     const ws = new WebSocket(
-      `ws://localhost:8000/ws/chat/${sender}/${receiver}/`
+      `ws://54.196.229.75:8000/ws/chat/${sender}/${receiver}/`
     );
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
