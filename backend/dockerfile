@@ -13,11 +13,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project files
 COPY . .
-# RUN python manage.py wait_for_db
-
-RUN python manage.py migrate --noinput
-
-RUN python manage.py createsuperuser --noinput --username sakthi --email sakthi12qaz@gmail.com
 
 # Gunicorn command
 CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "backend.asgi:application"]
